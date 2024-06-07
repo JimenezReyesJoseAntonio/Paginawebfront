@@ -1,18 +1,61 @@
 <header  *ngIf="!isAdmin">
 
     <nav class="horizontal-nav">
-        <a routerLink="/" class="nav-link">Home</a>
-        <a routerLink="/about" class="nav-link">About</a>
+        <a routerLink="/" class="nav-link">Inicio</a>
         <a routerLink="/blog" class="nav-link">Blog</a>
+        <a routerLink="/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/about" class="nav-link">Acerca de</a>
         <a routerLink="/login" class="nav-link">Login</a>
     </nav>
 </header>
 
 <header *ngIf="isAdmin">
     <nav class="horizontal-nav">
-        <a routerLink="/admin/home" class="nav-link">Home</a>
-        <a routerLink="/admin/about" class="nav-link">About</a>
+        <a routerLink="/admin/home" class="nav-link">Inicio</a>
         <a routerLink="/admin/blog" class="nav-link">Blog</a>
-        <a routerLink="/login" class="nav-link">Login</a>
+        <a routerLink="/admin/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/admin/about" class="nav-link">Acerca de</a>
+        <a routerLink="/login" class="nav-link">Logout</a>
     </nav>
 </header>
+
+<body>
+    <div class="header1">
+        <h1>Acerca de nosotros</h1>
+      </div>
+      <main *ngIf="informacionEmpresa">
+        <section class="about-us">
+          <p>{{ informacionEmpresa.about }}</p>
+        </section>
+        <section class="mission">
+          <h2>Misión</h2>
+          <p>{{ informacionEmpresa.mision }}</p>
+        </section>
+        <section class="vision">
+          <h2>Visión</h2>
+          <p>{{ informacionEmpresa.vision }}</p>
+        </section>
+      
+        <div *ngIf="isAdmin" class="admin-form">
+          <form [formGroup]="informacionForm" (ngSubmit)="updateInformacionEmpresa()">
+            <div>
+              <label for="about">Acerca de Nosotros:</label>
+              <textarea id="about" formControlName="about"></textarea>
+            </div>
+            <div>
+              <label for="mision">Misión:</label>
+              <textarea id="mision" formControlName="mision"></textarea>
+            </div>
+            <div>
+              <label for="vision">Visión:</label>
+              <textarea id="vision" formControlName="vision"></textarea>
+            </div>
+            <button type="submit">Actualizar</button>
+          </form>
+        </div>
+      </main>
+      <footer>
+        <p>&copy; 2024 Todos los derechos reservados.</p>
+      </footer>
+      
+</body>

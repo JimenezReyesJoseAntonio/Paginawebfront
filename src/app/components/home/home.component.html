@@ -1,25 +1,23 @@
-<body>
+<header  *ngIf="!isAdmin">
 
-    <header *ngIf="!isAdmin">
+    <nav class="horizontal-nav">
+        <a routerLink="/" class="nav-link">Inicio</a>
+        <a routerLink="/blog" class="nav-link">Blog</a>
+        <a routerLink="/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/about" class="nav-link">Acerca de</a>
+        <a routerLink="/login" class="nav-link">Login</a>
+    </nav>
+</header>
 
-        <nav class="horizontal-nav">
-            <a routerLink="/" class="nav-link">Home</a>
-            <a routerLink="/about" class="nav-link">About</a>
-            <a routerLink="/blog" class="nav-link">Blog</a>
-            <a routerLink="/login" class="nav-link">Login</a>
-        </nav>
-    </header>
-
-    <header *ngIf="isAdmin">
-        <nav class="horizontal-nav">
-            <a routerLink="/admin/home" class="nav-link">Home</a>
-            <a routerLink="/admin/about" class="nav-link">About</a>
-            <a routerLink="/admin/blog" class="nav-link">Blog</a>
-            <a routerLink="/login" class="nav-link">Logout</a>
-        </nav>
-    </header>
-
-</body>
+<header *ngIf="isAdmin">
+    <nav class="horizontal-nav">
+        <a routerLink="/admin/home" class="nav-link">Inicio</a>
+        <a routerLink="/admin/blog" class="nav-link">Blog</a>
+        <a routerLink="/admin/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/admin/about" class="nav-link">Acerca de</a>
+        <a routerLink="/login" class="nav-link">Logout</a>
+    </nav>
+</header>
 
 <!-- file.component.html -->
 <div class="container">
