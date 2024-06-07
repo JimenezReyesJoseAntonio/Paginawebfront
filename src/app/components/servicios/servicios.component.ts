@@ -101,6 +101,7 @@ export class ServiciosComponent {
 
 
   updateImagePath(id: number, newPath: string): void {
+    console.log('update image'+id);
     this.publicationService.updatePublication(id, { image: newPath }).subscribe(response => {
       console.log('Image path updated:', response);
 
@@ -116,7 +117,9 @@ export class ServiciosComponent {
     if (this.isAdmin && publication) {
       this.updatePublication(publication.id, {
         title: publication.title,
-        shortText: publication.shortText
+        shortText: publication.shortText,
+        fullText: publication.fullText
+
       }).subscribe(response => {
         console.log('Publicación actualizada:', response);
         this.closeModal();

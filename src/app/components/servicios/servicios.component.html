@@ -45,9 +45,10 @@
         <h2>{{ selectedPublication?.title }}</h2>
 
         <textarea  *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.title"></textarea>
+        <textarea *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.shortText"></textarea>
         <textarea *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.fullText"></textarea>
         <button *ngIf="isAdmin && selectedPublication" (click)="editPublication(selectedPublication)">Save</button>
         <input *ngIf="isAdmin && selectedPublication" type="file"
-            (change)="onFileChange($event, selectedPublication.id+10)">
+            (change)="onFileChange($event, selectedPublication.id+11)">
     </div>
 </div>
