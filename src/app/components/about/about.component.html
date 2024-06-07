@@ -1,0 +1,18 @@
+<header  *ngIf="!isAdmin">
+
+    <nav class="horizontal-nav">
+        <a routerLink="/" class="nav-link">Home</a>
+        <a routerLink="/about" class="nav-link">About</a>
+        <a routerLink="/blog" class="nav-link">Blog</a>
+        <a routerLink="/login" class="nav-link">Login</a>
+    </nav>
+</header>
+
+<header *ngIf="isAdmin">
+    <nav class="horizontal-nav">
+        <a routerLink="/admin/home" class="nav-link">Home</a>
+        <a routerLink="/admin/about" class="nav-link">About</a>
+        <a routerLink="/admin/blog" class="nav-link">Blog</a>
+        <a routerLink="/login" class="nav-link">Login</a>
+    </nav>
+</header>

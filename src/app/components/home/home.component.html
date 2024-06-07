@@ -1,0 +1,57 @@
+<body>
+
+    <header *ngIf="!isAdmin">
+
+        <nav class="horizontal-nav">
+            <a routerLink="/" class="nav-link">Home</a>
+            <a routerLink="/about" class="nav-link">About</a>
+            <a routerLink="/blog" class="nav-link">Blog</a>
+            <a routerLink="/login" class="nav-link">Login</a>
+        </nav>
+    </header>
+
+    <header *ngIf="isAdmin">
+        <nav class="horizontal-nav">
+            <a routerLink="/admin/home" class="nav-link">Home</a>
+            <a routerLink="/admin/about" class="nav-link">About</a>
+            <a routerLink="/admin/blog" class="nav-link">Blog</a>
+            <a routerLink="/login" class="nav-link">Logout</a>
+        </nav>
+    </header>
+
+</body>
+
+<!-- file.component.html -->
+<div class="container">
+    <div class="row">
+        <div class="col-half">
+            <!-- Carrusel -->
+            <div class="carousel-container">
+                <div *ngFor="let image of carouselImages; let i = index" class="carousel-slide" [style.display]="i === currentIndex ? 'block' : 'none'">
+                  <img [src]="image.url" [alt]="'Imagen ' + (i + 1)">
+                  <label class="file-input-label">
+                    <div *ngIf="isAdmin">
+                        Actualizar Imagen {{ i + 1 }}
+
+                        <input type="file" (change)="onFileChange($event, i)" class="file-input">
+                    </div>
+                  </label>
+                </div>
+                <button class="carousel-prev" (click)="prevSlide()">Anterior</button>
+                <button class="carousel-next" (click)="nextSlide()">Siguiente</button>
+              </div>
+            
+        </div>
+        <div class="col-half">
+            <!-- Imagen -->
+            <div class="image-container">
+                <img [src]="imageSrc" alt="Image" class="img-fluid">
+            </div>
+            <!-- Botones de Edición para Admin -->
+            <div *ngIf="isAdmin">
+                <input type="file" (change)="uploadFile($event)">
+                <button class="btn btn-primary" (click)="editImage()">Editar Imagen</button>
+            </div>
+        </div>
+    </div>
+</div>
