@@ -10,7 +10,8 @@ import { AboutComponent } from './components/about/about.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
+import { ReactiveFormsModule } from '@angular/forms';
+import { ServiciosComponent } from './components/servicios/servicios.component'; // Importa ReactiveFormsModule
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsMo
     LoginComponent,
     HomeComponent,
     BlogComponent,
-    AboutComponent
+    AboutComponent,
+    ServiciosComponent
   ],
   imports: [
     BrowserModule,

@@ -1,38 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Servicio } from '../../models/servicio.model';
 import { AuthService } from '../../services/auth.service';
-import { Publication } from '../../models/publication.model';
 import { PublicacionService } from '../../services/publicacion.service';
-import { ImageService } from '../../services/image.service';
 import { FileService } from '../../services/file.service';
+import { ImageService } from '../../services/image.service';
 import { Observable } from 'rxjs';
-
+import { ServicioService } from '../../services/servicio.service';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrl: './blog.component.css'
+  selector: 'app-servicios',
+  templateUrl: './servicios.component.html',
+  styleUrl: './servicios.component.css'
 })
-export class BlogComponent implements OnInit {
+export class ServiciosComponent {
   isAdmin: boolean = false;
   searchTerm: string = ''; // Propiedad para almacenar el término de búsqueda
 
-  publications: Publication[] = [];
+  publications: Servicio[] = [];
 
-  selectedPublication: Publication | null = null;
+  selectedPublication: Servicio | null = null;
   selectedImageUrl: string | null = null;
 
   imagesCard = [
-    { id: 6, url: '' },
-    { id: 7, url: '' },
-    { id: 8, url: '' },
-    { id: 9, url: '' },
-    { id: 10, url: '' },
-    { id: 11, url: '' }
+    { id: 12, url: '' },
+    { id: 13, url: '' },
+    { id: 14, url: '' },
+    { id: 15, url: '' },
+    { id: 16, url: '' },
+    { id: 17, url: '' }
   ];
 
   constructor(
     private authService: AuthService,
-    private publicationService: PublicacionService,
+    private publicationService: ServicioService,
     private fileService: FileService,
     private imageServ:ImageService
 
@@ -66,9 +66,10 @@ export class BlogComponent implements OnInit {
     });
   }
 
-  openModal(publication: Publication): void {
+  openModal(publication: Servicio): void {
     this.selectedPublication = publication;
-    const imageIndex = publication.id - 1;
+    console.log(this.selectedPublication.id);
+    const imageIndex = publication.id;
     this.selectedImageUrl = this.imagesCard[imageIndex]?.url || null;
 
   }
@@ -107,17 +108,15 @@ export class BlogComponent implements OnInit {
     });
   }
 
-  updatePublication(id: number, updateData: Partial<Publication>): Observable<Publication> {
+  updatePublication(id: number, updateData: Partial<Servicio>): Observable<Servicio> {
     return this.publicationService.updatePublication(id, updateData);
   }
 
-  editPublication(publication: Publication): void {
+  editPublication(publication: Servicio): void {
     if (this.isAdmin && publication) {
       this.updatePublication(publication.id, {
         title: publication.title,
-        author: publication.author,
-        shortText: publication.shortText,
-        fullText: publication.fullText
+        shortText: publication.shortText
       }).subscribe(response => {
         console.log('Publicación actualizada:', response);
         this.closeModal();

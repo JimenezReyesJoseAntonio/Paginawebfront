@@ -20,4 +20,5 @@ export class InfoService {
   updateInformacionEmpresa(id: number, data: Partial<Informacion>): Observable<Informacion> {
     return this.http.put<Informacion>(`${this.apiUrl}/${id}`, data);
   }
+  
 }

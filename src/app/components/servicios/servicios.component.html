@@ -1,0 +1,53 @@
+<header *ngIf="!isAdmin">
+    <nav class="horizontal-nav">
+        <a routerLink="/" class="nav-link">Inicio</a>
+        <a routerLink="/blog" class="nav-link">Blog</a>
+        <a routerLink="/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/about" class="nav-link">Acerca de</a>
+        <a routerLink="/login" class="nav-link">Login</a>
+        <div class="search-container">
+            <input type="text" placeholder="Search" class="search-input" [(ngModel)]="searchTerm">
+            <button class="search-button">Search</button>
+        </div>
+    </nav>
+</header>
+
+<header *ngIf="isAdmin">
+    <nav class="horizontal-nav">
+        <a routerLink="/admin/home" class="nav-link">Inicio</a>
+        <a routerLink="/admin/blog" class="nav-link">Blog</a>
+        <a routerLink="/admin/servicios" class="nav-link">Servicios</a>
+        <a routerLink="/admin/about" class="nav-link">Acerca de</a>
+        <div class="search-container">
+            <input type="text" placeholder="Search" class="search-input">
+            <button class="search-button">Search</button>
+        </div>
+        <a routerLink="/login" class="nav-link">Logout</a>
+
+    </nav>
+</header>
+
+<div class="publications-container">
+    <div *ngFor="let publication of publications" class="publication-card">
+        <img [src]="imagesCard[publication.id-1]?.url" alt="Publication Image" class="publication-image">
+        <h2 [ngClass]="{'highlight': shouldHighlight(publication.title)}">{{ publication.title }}</h2>
+        <p [ngClass]="{'highlight': shouldHighlight(publication.shortText)}">{{ publication.shortText }}</p>
+
+        <button (click)="openModal(publication)">Read More</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" [ngClass]="{'show': selectedPublication}">
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <img [src]="selectedImageUrl" alt="Publication Image" class="modal-image">
+        <h2>{{ selectedPublication?.title }}</h2>
+
+        <textarea  *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.title"></textarea>
+        <textarea *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.fullText"></textarea>
+        <button *ngIf="isAdmin && selectedPublication" (click)="editPublication(selectedPublication)">Save</button>
+        <input *ngIf="isAdmin && selectedPublication" type="file"
+            (change)="onFileChange($event, selectedPublication.id+10)">
+    </div>
+</div>

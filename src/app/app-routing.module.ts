@@ -5,12 +5,14 @@ import { LoginComponent } from './components/login/login.component';
 import { AboutComponent } from './components/about/about.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { AdminGuard } from './auth/admin.guard';
+import { ServiciosComponent } from './components/servicios/servicios.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'servicios', component: ServiciosComponent },
   { path: 'login', component: LoginComponent },
 
   {
@@ -19,7 +21,9 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'blog', component: BlogComponent }
+      { path: 'blog', component: BlogComponent },
+      { path: 'servicios', component: ServiciosComponent },
+
     ]
   }
 
