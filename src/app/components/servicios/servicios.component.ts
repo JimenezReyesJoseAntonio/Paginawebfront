@@ -70,8 +70,8 @@ export class ServiciosComponent {
     this.selectedPublication = publication;
     console.log(this.selectedPublication.id);
     const imageIndex = publication.id;
-    this.selectedImageUrl = this.imagesCard[imageIndex]?.url || null;
-
+    this.selectedImageUrl = this.imagesCard[imageIndex-1]?.url || null;
+    console.log('numero de imagen'+imageIndex);
   }
 
   closeModal(): void {

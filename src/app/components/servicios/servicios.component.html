@@ -43,6 +43,7 @@
         <span class="close" (click)="closeModal()">&times;</span>
         <img [src]="selectedImageUrl" alt="Publication Image" class="modal-image">
         <h2>{{ selectedPublication?.title }}</h2>
+        <p>{{ selectedPublication?.fullText }}</p>
 
         <textarea  *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.title"></textarea>
         <textarea *ngIf="isAdmin && selectedPublication" [(ngModel)]="selectedPublication.shortText"></textarea>
@@ -52,3 +53,21 @@
             (change)="onFileChange($event, selectedPublication.id+11)">
     </div>
 </div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Contáctanos</h3>
+            <a><i class="fa-solid fa-location-arrow"></i>Dirección: Calle sin numero</a>
+            <a><i class="fa-solid fa-phone"></i>Teléfono: 951213123</a>
+            <a><i class="fa-solid fa-envelope"></i>Email: empresa&#64;gmail.com</a>
+        </div>
+        <div class="footer-section">
+            <h3>Redes sociales</h3>
+            <a href="#"><i class="fa-brands fa-facebook"></i>Facebook</a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+            <a href="#"><i class="fa-brands fa-instagram"></i>Instagram</a>
+        </div>
+    </div>
+    <p>&copy; 2024 Todos los derechos reservados.</p>
+  </footer>

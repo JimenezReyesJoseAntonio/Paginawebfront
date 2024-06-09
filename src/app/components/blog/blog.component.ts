@@ -69,6 +69,7 @@ export class BlogComponent implements OnInit {
   openModal(publication: Publication): void {
     this.selectedPublication = publication;
     const imageIndex = publication.id - 1;
+  
     this.selectedImageUrl = this.imagesCard[imageIndex]?.url || null;
 
   }

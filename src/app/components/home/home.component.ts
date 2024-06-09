@@ -3,6 +3,9 @@ import { AuthService } from '../../services/auth.service';
 import { FileService } from '../../services/file.service';
 import { ImageService } from '../../services/image.service';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { Noticia } from '../../models/noticia.model';
+import { NoticiaService } from '../../services/noticia.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +21,12 @@ export class HomeComponent implements OnInit {
   image4: string = '';
   image5: string = '';
 
+  publications: Noticia[] = [];
 
+  selectedNoticia: Noticia | null = null;
+  selectedNoticiaIz: Noticia | null = null;
+
+  selectedImageUrl: string | null = null;
   currentIndex = 0;
 
   carouselImages = [
@@ -32,7 +40,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private fileService: FileService,
-    private imageServ:ImageService
+    private imageServ:ImageService,
+    private notiServ:NoticiaService,
+
 
   ) {
     this.isAdmin = this.authService.isAdmin();
@@ -43,9 +53,16 @@ export class HomeComponent implements OnInit {
 
     this.loadImage(1); // Suponiendo que deseas cargar la imagen con ID 1
     this.loadCarouselImages();
-
+    this.loadPublications();
 
   }
+
+  loadPublications(): void {
+    this.notiServ.getPublications().subscribe(publications => {
+      this.publications = publications;
+    });
+  }
+
   loadCarouselImages(): void {
     this.carouselImages.forEach((image, index) => {
       this.loadImage2(image.id, index);
@@ -87,17 +104,8 @@ export class HomeComponent implements OnInit {
     this.imageServ.updateImageById(id, newPath).subscribe(response => {
       console.log('Image path updated:', response);
       this.loadImage2(id, this.carouselImages.findIndex(image => image.id === id));
+      this.closeModal();
     });
-  }
-
-  editCarousel(): void {
-    // Implementa la lógica de edición del carrusel para el admin
-    console.log('Editar Carrusel');
-  }
-
-  editImage(): void {
-    // Implementa la lógica de edición de la imagen para el admin
-    console.log('Editar Imagen');
   }
 
   uploadFile(event: any) {
@@ -117,19 +125,51 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /*getFile(filePath: string) {
-    this.fileService.getFile(filePath).subscribe(blob => {
-      const fileURL = URL.createObjectURL(blob);
-      this.imageSrc = fileURL;
-      console.log('hola'+this.imageSrc);
-    });
-  }
-    */
+  openModal(id:any ): void {
+    this.selectedNoticia = this.publications[id];
+    const imageIndex = id ;
+    this.selectedImageUrl = this.carouselImages[imageIndex]?.url || null;
 
-  updateImage(image: any) {
-    // Implementa la lógica para actualizar la imagen 'image'
-    console.log('Actualizando imagen:', image);
-    // Puedes llamar a un servicio HTTP para actualizar la imagen en el servidor
+    console.log('imageIndex'+imageIndex);
+    console.log('noticia'+this.selectedNoticia.id);
+
+
+  }
+
+  openModalIz(): void {
+    this.selectedNoticiaIz = this.publications[4];
+
+    console.log('noticia izquierda');
+
+
+  }
+
+  closeModal(): void {
+    this.selectedNoticia = null;
+  }
+
+  closeModalIz(): void {
+    this.selectedNoticiaIz = null;
+  }
+
+  updatePublication(id: number, updateData: Partial<Noticia>): Observable<Noticia> {
+    return this.notiServ.updatePublication(id, updateData);
+  }
+
+  editPublication(publication: Noticia): void {
+    console.log('update'+publication.id)
+    if (this.isAdmin && publication) {
+      this.updatePublication(publication.id, {
+        title: publication.title,
+        fullText: publication.fullText
+      }).subscribe(response => {
+        console.log('Publicación actualizada:', response);
+        this.closeModal();
+        this.closeModalIz();
+
+        this.loadPublications(); // Recargar las publicaciones para mostrar la información actualizada
+      });
+    }
   }
 
 }
