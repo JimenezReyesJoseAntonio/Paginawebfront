@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   isAdmin: boolean = false;
   imageSrc: string = '';
+  imageLogo: string = '';
+
   image1: string = '';
   image2: string = '';
   image3: string = '';
@@ -52,6 +54,8 @@ export class HomeComponent implements OnInit {
     console.log('hola'+this.imageSrc);
 
     this.loadImage(1); // Suponiendo que deseas cargar la imagen con ID 1
+    this.loadImageLogo(22); // Suponiendo que deseas cargar la imagen con ID 1
+
     this.loadCarouselImages();
     this.loadPublications();
 
@@ -78,6 +82,15 @@ export class HomeComponent implements OnInit {
   loadImage(id: number): void {
     this.imageServ.getImagePathById(id).subscribe(response => {
         this.imageSrc = response.path;
+     
+    });
+  }  
+
+  
+  loadImageLogo(id: number): void {
+    this.imageServ.getImagePathById(id).subscribe(response => {
+        this.imageLogo = response.path;
+        console.log(response.path);
      
     });
   }  
@@ -118,12 +131,33 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  uploadFileLogo(event: any){
+    const file = event.target.files[0];
+    this.fileService.uploadFile(file).subscribe(response => {
+      console.log('Archivo subido:', response.filePath);
+      //this.getFile(response.filePath);
+      this.updateImagePathLogo(22, response.filePath); // Actualiza la imagen con ID 1
+
+    });
+  }
+
   updateImagePath(id: number, newPath: string): void {
     this.imageServ.updateImageById(id, newPath).subscribe(response => {
       console.log('Image path updated:', response);
       this.loadImage(id); // Recargar la imagen actualizada
+      this.loadImageLogo(22); // Suponiendo que deseas cargar la imagen con ID 1
+
     });
   }
+
+  updateImagePathLogo(id: number, newPath: string): void {
+    this.imageServ.updateImageById(id, newPath).subscribe(response => {
+      console.log('Image path updated:', response);
+      this.loadImageLogo(22); // Suponiendo que deseas cargar la imagen con ID 1
+
+    });
+  }
+  
 
   openModal(id:any ): void {
     this.selectedNoticia = this.publications[id];

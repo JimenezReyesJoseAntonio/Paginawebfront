@@ -20,6 +20,7 @@ export class ServiciosComponent {
 
   selectedPublication: Servicio | null = null;
   selectedImageUrl: string | null = null;
+  imageLogo: string = '';
 
   imagesCard = [
     { id: 12, url: '' },
@@ -43,7 +44,17 @@ export class ServiciosComponent {
   ngOnInit(): void {
     this.loadPublications();
     this.loadImages();
+    this.loadImageLogo(22); // Suponiendo que deseas cargar la imagen con ID 1
+
   }
+
+  loadImageLogo(id: number): void {
+    this.imageServ.getImagePathById(id).subscribe(response => {
+        this.imageLogo = response.path;
+        console.log(response.path);
+     
+    });
+  } 
 
   loadPublications(): void {
     this.publicationService.getPublications().subscribe(publications => {

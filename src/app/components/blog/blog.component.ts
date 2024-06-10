@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 export class BlogComponent implements OnInit {
   isAdmin: boolean = false;
   searchTerm: string = ''; // Propiedad para almacenar el término de búsqueda
+  imageLogo: string = '';
 
   publications: Publication[] = [];
 
@@ -43,7 +44,17 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     this.loadPublications();
     this.loadImages();
+    this.loadImageLogo(22);
   }
+
+   
+  loadImageLogo(id: number): void {
+    this.imageServ.getImagePathById(id).subscribe(response => {
+        this.imageLogo = response.path;
+        console.log(response.path);
+     
+    });
+  }  
 
   loadPublications(): void {
     this.publicationService.getPublications().subscribe(publications => {

@@ -298,3 +298,10 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.imaIz{
+  margin-right: 1500px;
+  height: 30px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}

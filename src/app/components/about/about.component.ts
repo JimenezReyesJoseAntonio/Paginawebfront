@@ -19,6 +19,7 @@ export class AboutComponent  implements OnInit{
   informacionEmpresa: Informacion | null = null;
   informacionForm: FormGroup;
   organigramaData: Organigrama[] = [];
+  imageLogo: string = '';
 
   imagesCard = [
     { id: 18, url: '' },
@@ -47,8 +48,18 @@ export class AboutComponent  implements OnInit{
     this.loadInformacionEmpresa();
     this.loadPublications();
     this.loadImages();
+    this.loadImageLogo(22); // Suponiendo que deseas cargar la imagen con ID 1
+
   }
 
+   
+  loadImageLogo(id: number): void {
+    this.imageServ.getImagePathById(id).subscribe(response => {
+        this.imageLogo = response.path;
+        console.log(response.path);
+     
+    });
+  }  
   loadImages(): void {
     this.imagesCard.forEach(image => {
       this.imageServ.getImagePathById(image.id).subscribe(response => {

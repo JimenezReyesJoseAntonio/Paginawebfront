@@ -7,10 +7,11 @@ body {
   header {
     background-color: #f0f0f0;
     padding: 20px 0;
+    height: 80px;
   }
   
   .container{
-    background-color: rgb(241, 239, 244);
+    background-color: white;
   }
   
   .horizontal-nav {
@@ -248,4 +249,28 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.nombre-empresa{
+
+ display: flex;
+ justify-content: center;
+}
+
+h1{
+  font-size: 50px;
+  color: #ffbf00;
+}
+
+.giro{
+  display: flex;
+ justify-content: center;
+}
+
+.imaIz{
+  margin-right: 800px;
+  height: 30px;
+  width: 50px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }

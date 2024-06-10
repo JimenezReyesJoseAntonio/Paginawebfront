@@ -1,4 +1,8 @@
 <header *ngIf="!isAdmin">
+    <div class="imaIz">
+        <img [src]="imageLogo" height="100px" width="150px" alt="Image" class="img-fluid">
+
+    </div>
     <nav class="horizontal-nav">
         <a routerLink="/" class="nav-link">Inicio</a>
         <a routerLink="/blog" class="nav-link">Blog</a>
@@ -13,6 +17,10 @@
 </header>
 
 <header *ngIf="isAdmin">
+    <div class="imaIz">
+        <img [src]="imageLogo" height="100px" width="150px" alt="Image" class="img-fluid">
+
+    </div>
     <nav class="horizontal-nav">
         <a routerLink="/admin/home" class="nav-link">Inicio</a>
         <a routerLink="/admin/blog" class="nav-link">Blog</a>
@@ -26,6 +34,8 @@
 
     </nav>
 </header>
+
+
 
 <div class="publications-container">
     <div *ngFor="let publication of publications" class="publication-card">
@@ -66,7 +76,7 @@
         </div>
         <div class="footer-section">
             <h3>Redes sociales</h3>
-            <a href="#"><i class="fa-brands fa-facebook"></i>Facebook</a>
+            <a href="https://www.facebook.com/share/aTPABdsH21XbWRYV/?mibextid=qi2Omg"><i class="fa-brands fa-facebook"></i>Facebook</a>
             <a href="#"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
             <a href="#"><i class="fa-brands fa-instagram"></i>Instagram</a>
         </div>
