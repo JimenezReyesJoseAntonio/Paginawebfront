@@ -50,6 +50,13 @@ export class HomeComponent implements OnInit {
     this.isAdmin = this.authService.isAdmin();
   }
 
+
+  intervalId: any;
+
+  
+
+  
+
   ngOnInit(): void {
     console.log('hola'+this.imageSrc);
 
@@ -58,7 +65,25 @@ export class HomeComponent implements OnInit {
 
     this.loadCarouselImages();
     this.loadPublications();
+    this.startAutoSlide();
 
+
+  }
+
+  ngOnDestroy() {
+    this.stopAutoSlide();
+  }
+
+  startAutoSlide() {
+    this.intervalId = setInterval(() => {
+      this.nextSlide();
+    }, 6000); // Cambia de imagen cada 3 segundos
+  }
+
+  stopAutoSlide() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   loadPublications(): void {

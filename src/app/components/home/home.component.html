@@ -13,6 +13,8 @@
         <a routerLink="/servicios" class="nav-link">Servicios</a>
         <a routerLink="/about" class="nav-link">Acerca de</a>
         <a routerLink="/login" class="nav-link">Login</a>
+        <a href="https://constructoracontreras.000webhostapp.com/usuario/index_user.php"><i class="fa-solid fa-house" style="color: black;margin-left:20px; ; font-size: 2em;"></i></a>
+
     </nav>
 </header>
 
@@ -29,6 +31,8 @@
         <a routerLink="/admin/servicios" class="nav-link">Servicios</a>
         <a routerLink="/admin/about" class="nav-link">Acerca de</a>
         <a routerLink="/login" class="nav-link">Logout</a>
+        <a href="https://constructoracontreras.000webhostapp.com/usuario/index_user.php"><i class="fa-solid fa-house" style="color: black;margin-left:20px; ; font-size: 2em;"></i></a>
+
     </nav>
 </header>
 
@@ -48,7 +52,7 @@
             <div class="carousel-container">
                 <div *ngFor="let image of carouselImages; let i = index" class="carousel-slide" [style.display]="i === currentIndex ? 'block' : 'none'">
                   <img [src]="image.url" [alt]="'Imagen ' + (i + 1)">
-                  <button class="centered-button" (click)="openModal(i)">Ver más</button>
+                  <button class="centered-button" (click)="openModal(i)">Leer más</button>
                   <label class="file-input-label">
                     <div *ngIf="isAdmin">
                         Actualizar Imagen {{ i + 1 }}
@@ -57,9 +61,10 @@
                 </div>
                 <button class="carousel-prev" (click)="prevSlide()">Anterior</button>
                 <button class="carousel-next" (click)="nextSlide()">Siguiente</button>
+                <button class="centered-service"routerLink="/servicios">Ir a Servicios</button>
+
               </div>
-            
-        </div>
+            </div>
         <div class="col-half">
             <!-- Imagen -->
             <div class="image-container">
